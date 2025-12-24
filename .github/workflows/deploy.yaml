@@ -15,10 +15,10 @@ jobs:
     - name: Deploy to Azure VM
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        port: 2222
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.VPS_SECRET_KEY }}
+        port: ${{ secrets.SSH_PORT }}
         script: |
           rm -rf /var/www/kelompokmjsasep/*
           cp -r * /var/www/kelompokmjsasep/
