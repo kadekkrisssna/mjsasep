@@ -2,7 +2,8 @@ name: Deploy Web to Nginx
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -12,7 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Deploy files to server
+    - name: Deploy to VPS via SSH
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.VPS_HOST }}
@@ -20,4 +21,7 @@ jobs:
         key: ${{ secrets.VPS_SECRET_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          rsync -av --delete /github/workspace/ /var/www/kelompokmjsasep/
+          sudo rsync -av --delete /github/workspace/ /var/www/kelompokmjsasep/
+          sudo chown -R www-data:www-data /var/www/kelompokmjsasep
+          sudo chmod -R 755 /var/www/kelompokmjsasep
+          sudo systemctl reload nginx
