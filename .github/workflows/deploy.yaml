@@ -1,0 +1,27 @@
+name: Deploy Web to Nginx
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Deploy to Debian Server
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 2222
+        script: |
+          sudo rm -rf /var/www/kelompokmjsasep/*
+          sudo cp -r * /var/www/kelompokmjsasep/
+          sudo chown -R www-data:www-data /var/www/kelompokmjsasep
+          sudo chmod -R 755 /var/www/kelompokmjsasep

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Booking - Harmoni Spa</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: url('assets/images/booking-image.jpg') center/cover no-repeat;
+        margin: 0;
+        min-height: 100vh;
+      }
+
+      nav.navbar {
+        background: transparent;
+        position: absolute;
+        width: 100%;
+        backdrop-filter: blur(3px);
+      }
+
+      .navbar-nav .nav-link {
+        color: #fff;
+        text-shadow: 2px 2px 4px rgb(0, 0, 0);
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #d0ffd9;
+      }
+
+      .booking-section {
+        display: flex;
+        align-items: center;
+        margin-top: 35px;
+        min-height: 100vh;
+        color: white;
+        padding: 90px 0;
+      }
+
+      .booking-box {
+        background: rgba(255, 255, 255, 0.93);
+        color: #333;
+        border-radius: 15px;
+        padding: 40px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-custom {
+        background: #32744c;
+        color: white;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .btn-custom:hover {
+        background: #4ca06d;
+        transform: scale(1.05);
+      }
+
+      .availability-box {
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 10px;
+        display: none; /* nanti diubah lewat JS */
+      }
+
+      .available {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .not-available {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      /* sementara simulasi */
+      .availability-box.simulasi {
+        display: block;
+      }
+
+      .profile-link {
+    position: absolute; /* Mengatur posisi absolut */
+    top: 90px;          /* Jarak dari atas */
+    right: 20px;        /* Jarak dari kanan */
+    z-index: 1000;      /* Memastikan gambar berada di atas elemen lain */
+}
+
+.profile-image {
+    width: 40px;  /* Lebar gambar */
+    height: 40px; /* Tinggi gambar */
+    border-radius: 50%; /* Membuat gambar menjadi bulat (opsional) */
+    object-fit: cover; /* Memastikan gambar tetap proporsional saat dibulatkan */
+    cursor: pointer; /* Menampilkan kursor tangan saat di atas gambar */
+    transition: transform 0.2s;
+}
+
+.profile-image:hover {
+    transform: scale(1.1); 
+}
+    
+    </style>
+  </head>
+
+  <body>
+   <header >
+    <nav class="navbar navbar-expand-lg" style="background: transparent; position: absolute; top: 0; left: 0; width: 100%; backdrop-filter: blur(4px);">
+
+      <div class="container-fluid d-flex justify-content-between align-items-center" >
+        
+        <a class="navbar-brand" href="index.html#home">
+          <img src="assets/images/harmoni Spa.png" alt="Harmoni Spa" width="65" height="65">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav" style="font-size: large;">
+            <a class="nav-link" aria-current="page" href="index.html#home">Home</a>
+            <a class="nav-link" href="index.html#services">Service</a>
+            <a class="nav-link" href="index.html#testimonials">Testimonials</a>
+            <a class="nav-link" href="index.html#about">About</a>
+            <a class="nav-link" href="index.html#contact">Contact</a>
+        </div>
+      </div>
+      </div>
+    </nav>
+</header>
+
+    <section class="booking-section">
+      <div class="container">
+        <a href="profile.html" class="profile-link">
+            <img src="assets/images/profile.png" alt="Profile" class="profile-image">
+        </a>
+
+        <div class="booking-box text-center">
+          <h2 class="mb-4">Book Your Spa Session</h2>
+          <p class="text-muted mb-4">Relax and find your harmony — check availability below</p>
+
+          <select class="form-select mb-3" id="service" required>
+            <option selected disabled>Select Service</option>
+            <option>1. Traditional Massage (1 hour) — 09:00-10:00</option>
+            <option>2. Traditional Massage (2 hour) — 09:00-11:00</option>
+            <option>3. Aromatherapy Massage (1 hour) — 09:00-10:00</option>
+            <option>4. Aromatherapy Massage (2 hour) — 09:00:11:00</option>
+            <option>5. Foot Massage (30 minutes) — 09:00:09:30</option>
+            <option>6. Foot Massage (30 minutes) — 09:30-10:00</option>
+          </select>
+
+             <input type="date" class="form-control mb-4" id="date" required>
+
+             <button type="button" class="btn btn-custom w-100">Check Availability</button>
+
+          <div class="availability-box available simulasi mt-4">
+            ✅ Service available!  
+            <br>3 slots remaining for your selected date. <br>
+            <button class="btn btn-success btn-sm mt-3" onclick="window.location.href='login.html'">Pay Now</button>
+          </div>
+
+          <div class="availability-box not-available simulasi mt-4">
+            ❌ Sorry, this service is fully booked on that date.<br>
+            Please choose another date.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

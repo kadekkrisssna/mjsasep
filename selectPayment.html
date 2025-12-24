@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Payment - Harmoni Spa</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #d8e7da;
+      font-family: "Poppins", sans-serif;
+    }
+    .card {
+      background-color: #b7d2bc;
+      border: none;
+      border-radius: 15px;
+      padding: 30px;
+      width: 420px;
+      max-width: 90%;
+    }
+    .option-btn {
+      background-color: #97bda2;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      color: white;
+      width: 45%;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .option-btn:hover,
+    .option-btn.active {
+      background-color: #6fa17a;
+    }
+  </style>
+</head>
+<body class="d-flex align-items-center justify-content-center vh-100">
+  <div class="card text-center shadow-sm">
+            <div> 
+        <div class="text-start mb-3" style="max-width: 400px; margin: 0 auto;">
+             <a href="booking.html" class="btn btn-success">
+                Back
+            </a>
+        </div>
+    <h4 class="fw-bold mb-4">Booking Summary</h4>
+
+    <div class="mb-4 text-start bg-success bg-opacity-25 p-3 rounded">
+      <strong>Body Massage</strong><br>
+      Balinese Massage, Aromatherapy Massage<br>
+      <small>Monday • 9-10 AM</small><br>
+      <strong>Total: Rp100.000</strong>
+    </div>
+
+    <h6 class="fw-semibold mb-3">Select Payment</h6>
+    <form action="payment.html" method="get">
+      <div class="d-flex flex-wrap justify-content-between mb-4">
+        <div>
+    <input type="radio" id="bca" name="payment_method" value="bca" />
+    <label for="bca">BCA</label>
+</div>
+
+<div>
+    <input type="radio" id="bni" name="payment_method" value="bni" />
+    <label for="bni">bni</label>
+</div>
+       <div>
+    <input type="radio" id="bca" name="payment_method" value="bca" />
+    <label for="bca">OVO</label>
+</div>
+
+<div>
+    <input type="radio" id="mandiri" name="payment_method" value="mandiri" />
+    <label for="mandiri">cash(pay in cashier)</label>
+</div>
+
+      <input type="hidden" name="method" id="paymentMethod" required><br><br>
+
+      <button type="submit" class="btn btn-success px-5 d-block mx-auto" id="nextBtn">Next</button>
+    </form>
+  </div>
+  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
