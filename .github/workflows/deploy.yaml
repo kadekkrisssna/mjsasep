@@ -1,4 +1,4 @@
-name: Deploy Web
+name: Deploy Web to Nginx
 
 on:
   push:
@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Deploy to Server via SSH
+    - name: Deploy to Azure VM
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.SSH_HOST }}
@@ -20,5 +20,5 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: 22
         script: |
-          sudo rm -rf /var/www/kelompokmjsasep/*
-          sudo cp -r * /var/www/kelompokmjsasep/
+          rm -rf /var/www/kelompokmjsasep/*
+          cp -r * /var/www/kelompokmjsasep/
