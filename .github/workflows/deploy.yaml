@@ -10,20 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Deploy to Server
-    uses: appleboy/ssh-action@v1.0.0
-    with:
-    host: ${{ secrets.SSH_HOST }}
-    username: ${{ secrets.SSH_USER }}
-    key: ${{ secrets.SSH_KEY }}
-    port: ${{ secrets.SSH_PORT }}
-    script: |
-      sudo rsync -av --delete /github/workspace/ /var/www/kelompokmjsasep/
-      sudo chown -R www-data:www-data /var/www/kelompokmjsasep
-      sudo chmod -R 755 /var/www/kelompokmjsasep
-      sudo systemctl reload nginx
-
- 
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            sudo rsync -av ./ /var/www/kelompokmjsasep/
+            sudo chown -R www-data:www-data /var/www/kelompokmjsasep
+            sudo chmod -R 755 /var/www/kelompokmjsasep
+            sudo systemctl reload nginx
