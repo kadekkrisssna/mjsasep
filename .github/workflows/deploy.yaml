@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to VPS via SSH
+      - name: Deploy to Server
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -23,18 +23,27 @@ jobs:
           script: |
             set -e
 
-            echo "== Masuk ke folder web =="
-            cd /var/www/kelompokmjsasep
+            echo "== Pindah ke /var/www =="
+            cd /var/www
 
-            echo "== Hapus file lama =="
-            sudo rm -rf *
+            echo "== Hapus folder sementara =="
+            sudo rm -rf kelompokmjsasep_tmp
 
-            echo "== Clone repo baru =="
-            sudo git clone https://github.com/kadekkrisssna/mjsasep.git .
+            echo "== Clone repo ke folder sementara =="
+            sudo git clone https://github.com/kadekkrisssna/mjsasep.git kelompokmjsasep_tmp
+
+            echo "== Kosongkan folder web =="
+            sudo rm -rf kelompokmjsasep/*
+
+            echo "== Pindahkan hasil deploy =="
+            sudo cp -r kelompokmjsasep_tmp/* kelompokmjsasep/
 
             echo "== Set permission =="
-            sudo chown -R www-data:www-data /var/www/kelompokmjsasep
-            sudo chmod -R 755 /var/www/kelompokmjsasep
+            sudo chown -R www-data:www-data kelompokmjsasep
+            sudo chmod -R 755 kelompokmjsasep
+
+            echo "== Bersihkan =="
+            sudo rm -rf kelompokmjsasep_tmp
 
             echo "== Reload nginx =="
             sudo systemctl reload nginx
