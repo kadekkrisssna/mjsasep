@@ -13,15 +13,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Deploy to VPS via SSH
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.VPS_SECRET_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          sudo rsync -av --delete /github/workspace/ /var/www/kelompokmjsasep/
-          sudo chown -R www-data:www-data /var/www/kelompokmjsasep
-          sudo chmod -R 755 /var/www/kelompokmjsasep
-          sudo systemctl reload nginx
+    - name: Deploy to Server
+    uses: appleboy/ssh-action@v1.0.0
+    with:
+    host: ${{ secrets.SSH_HOST }}
+    username: ${{ secrets.SSH_USER }}
+    key: ${{ secrets.SSH_KEY }}
+    port: ${{ secrets.SSH_PORT }}
+    script: |
+      sudo rsync -av --delete /github/workspace/ /var/www/kelompokmjsasep/
+      sudo chown -R www-data:www-data /var/www/kelompokmjsasep
+      sudo chmod -R 755 /var/www/kelompokmjsasep
+      sudo systemctl reload nginx
+
+ 
